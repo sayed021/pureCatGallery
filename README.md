@@ -6,4 +6,4 @@
 
 ### Gallery Popup
 
-![Gallery Popup](images/gallery1.png)
+![Gallery Popup](images/gallery2.png)

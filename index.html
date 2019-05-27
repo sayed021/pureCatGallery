@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.js"
+		  integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI="
+		  crossorigin="anonymous"></script>
+
+		  <link rel="stylesheet" href="style.css">
+
+	<script>
+		jQuery(document).ready(function($) {
+			var totalPhotos = jQuery("[circleGallery]").children('.gallery-item').length;
+			var parWith = 360/totalPhotos;
+
+			jQuery('[circleGallery]').css({
+				width: '200px',
+				height: '200px',
+				position: 'relative',
+				margin: '0 auto'
+			});
+
+			jQuery("[circleGallery]").children('.gallery-item').each(function(index, el) {
+
+				var rotateValue='rotateY('+parWith*(index)+'deg) translateZ(480px)';
+				$(el).css({transform: rotateValue});
+				
+			});
+
+			$('.gallery-item').on('click', function(index,el){
+				var rotateValue='rotateY('+20*($(this).index()+1)+'deg)';
+				
+				$('[circleGallery]').css({animationPlayState: 'paused'});
+				$('[circleGallery]').css({transform: rotateValue});
+
+				setTimeout(function(){
+					$('[circleGallery]').css({animationPlayState: ''});
+				},1500);
+				
+			});
+
+		}); //end document ready
+
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div circleGallery id="cat12" class="circleGallery">
+
+	        <div class="gallery-item">
+	        	<a href="images/1.jpg"><img src="images/1.jpg" alt=""></a>
+	        </div>
+
+	        <div class="gallery-item">
+	        	<a href="images/2.jpeg"><img src="images/2.jpeg" alt=""></a>
+	        </div>
+
+	        <div class="gallery-item">
+	        	<a href="images/3.jpg"><img src="images/3.jpg" alt=""></a>
+	        </div>
+
+	        <div class="gallery-item">
+	        	<a href="images/4.jpg"><img src="images/4.jpg" alt=""></a>
+	        </div>
+	        <div class="gallery-item">
+	        	<a href="images/5.jpg"><img src="images/5.jpg" alt=""></a>
+	        </div>
+	        
+	        <div class="gallery-item">
+	        	<a href="images/6.jpg"><img src="images/6.jpg" alt=""></a>
+	        </div>
+	        <div class="gallery-item">
+	        	<a href="images/7.jpg"><img src="images/7.jpg" alt=""></a>
+	        </div>
+	        <div class="gallery-item">
+	        	<a href="images/8.jpg"><img src="images/8.jpg" alt=""></a>
+	        </div>
+	        <div class="gallery-item">
+	        	<a href="images/9.jpg"><img src="images/9.jpg" alt=""></a>
+	        </div>
+	        <div class="gallery-item">
+	        	<a href="images/10.jpeg"><img src="images/10.jpeg" alt=""></a>
+	        </div>
+	        <div class="gallery-item">
+	        	<a class="g-item" href="images/11.jpg"><img src="images/11.jpg" alt=""></a>
+	        </div>
+	        <div class="gallery-item">
+	        	<a class="g-item" href="images/12.jfif"><img id="img1" src="images/12.jfif" alt=""></a>
+	        </div>
+	    </div>
+    </div>
+
+    <script>
+    	
+(function(){
+
+
+
+		var glItems = document.getElementById('cat12').getElementsByTagName('a');
+
+		// click stop here and action when click the gallery item
+		for (var k = 0; k <glItems.length; k+=1) {
+			glItems[k].addEventListener('click', function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				generatePopup(e.target.getAttribute('src'));
+			});   			
+		};
+
+	    var images = document.getElementById('cat12').getElementsByTagName('img');
+	    for (var i = 0; i < images.length; i++) {
+	    	// console.log(images[i].outerHTML)
+	    }
+
+	    function generatePopup(src) {
+	    	var carPopupWrap = document.createElement('div');
+	    		carPopupWrap.classList +='catPopup';
+
+	    	var catImage =  new Image();
+	    		catImage.setAttribute('src', src);
+
+	    	var imgWrap = document.createElement('div');
+	    		imgWrap.classList +='imgWrap';
+	    		imgWrap.appendChild(catImage);
+
+	    	var carPopupBody = document.createElement('div');
+	    		carPopupBody.classList +='catPopupBody';
+
+	    	var closeButton = document.createElement('span');
+	    		closeButton.appendChild(document.createTextNode("+"));
+	    		closeButton.classList +='closePopup';
+
+	    		carPopupBody.appendChild(closeButton);
+
+	    	closeButton.addEventListener('click', function(event) {
+		    	console.log(event.target.outerHTML);
+		    	carPopupWrap.classList +=" hidePopup";
+		    	setTimeout(function(){
+		    		carPopupWrap.remove();
+		    	},500);
+		    });
+
+	    	carPopupBody.appendChild(imgWrap);
+	    	carPopupWrap.appendChild(carPopupBody);
+
+	    	//overlay
+	    	var overlay = document.createElement('div');
+	    		overlay.classList +='catOverlay';
+	    		overlay.setAttribute('id', 'catOverlay');
+
+	    	// overlay.appendChild(closeButton);
+	    	carPopupWrap.appendChild(overlay);
+	    	document.getElementsByTagName('body')[0].appendChild(carPopupWrap);
+
+	    	//close popup when click overlay
+	    	overlay.addEventListener('click', function(event) {
+		    	carPopupWrap.classList +=" hidePopup";
+		    	setTimeout(function(){
+		    		carPopupWrap.remove();
+		    	},500);
+		    });
+	    }
+
+
+
+
+
+})()
+    		
+    </script>
+</body>
+</html>

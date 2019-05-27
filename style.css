@@ -1,0 +1,130 @@
+.container {
+	width: 600px;
+	margin: 0 auto;
+	padding-top: 100px;
+    -webkit-transform-style: preserve-3d;
+	transform: rotateY(-50deg) rotateX(-10deg);
+
+}
+
+@keyframes rotateAnimation {
+	0%{
+		transform: rotateY(0);
+	}
+	100%{
+		transform: rotateY(360deg);
+	}
+}
+
+[circleGallery] {
+	    -webkit-transform-style: preserve-3d;
+	    transform-style: preserve-3d;
+	    backface-visibility: visible;
+	    -webkit-transform-style: preserve-3d;
+	    
+	    animation: rotateAnimation 15s linear 0s infinite;
+ }
+
+[circleGallery] .gallery-item {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-size: 100% auto !important;
+	color: gray;
+	backface-visibility: visible;
+	box-shadow: inset 0 0 5px 1px rgba(0,0,0,0.1);
+	border: 2px solid transparent; 
+	transition: 0.3s;
+	cursor: pointer;
+}
+[circleGallery]:hover {
+	animation-play-state: paused;
+}
+[circleGallery] .gallery-item a {
+	display: block;
+	transition: 0.3s;
+}
+[circleGallery] .gallery-item:hover a {
+	box-shadow: 0 0 30px 5px rgba(0,0,0,0.5);
+	margin-top: -20px;
+}
+[circleGallery] img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.catPopup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.catPopupBody {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 999;
+	display: table;
+	transition: 0.5s;
+	z-index: 5;
+	transition: top 0.3s;
+	background: #fff;
+	padding: 20px;
+	border-radius: 5px;
+
+}
+
+.catPopupBody .imgWrap {
+	display: table-cell;
+	vertical-align: middle;
+	border: 1px solid #eee;
+}
+
+.catPopupBody img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.catPopup .catOverlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.6);
+	z-index: 3;
+}
+.catPopup .closePopup {
+	display: block;
+	position: absolute;
+	right: -5px;
+	top: -5px;
+	width: 20px;
+	height: 20px;
+	background: #eee;
+	border-radius: 50%;
+	color: red;
+	cursor: pointer;
+	font-size: 20px;
+	line-height: 20px;
+	font-weight: 700;
+	text-align: center;
+	transform: rotate(45deg);
+	border: 1px solid rgba(255,0,55,0.3);
+}
+.catPopup.hidePopup {
+	transition: .5s;
+	opacity: 0;
+	visibility: hidden;
+}
+.catPopup.hidePopup .catPopupBody {
+	transition: 0.3s;
+	top: 0;
+	transform: translate(-50%, 100%) scale(0.3);
+}
